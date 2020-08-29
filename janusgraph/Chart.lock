@@ -1,9 +1,0 @@
-dependencies:
-- name: cassandra
-  repository: https://charts.bitnami.com/bitnami
-  version: 5.6.1
-- name: elasticsearch
-  repository: https://charts.bitnami.com/bitnami
-  version: 12.6.2
-digest: sha256:e913a6f8df5ecf85bc24e5829b1570aae18953c0e6f6b92383cfe71f62900732
-generated: "2020-08-22T16:59:29.522109+02:00"
