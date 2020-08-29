@@ -1,0 +1,18 @@
+apiVersion: v2
+name: janusgraph
+description: janusgraph helm chart
+type: application
+version: 0.1.0
+appVersion: 0.5.2
+maintainers:
+- name: Robert Keck
+  email: robert.keck@outlook.com
+dependencies:
+- name: cassandra
+  version: 5.6.1
+  repository: https://charts.bitnami.com/bitnami
+  condition: storagebackend.cassandra.deploy
+- name: elasticsearch
+  version: 12.6.2
+  repository: https://charts.bitnami.com/bitnami
+  condition: storagebackend.elasticsearch.deploy

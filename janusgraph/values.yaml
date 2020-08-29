@@ -1,0 +1,91 @@
+replicaCount: 1
+
+image:
+  repository: janusgraph/janusgraph
+  pullPolicy: IfNotPresent
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 8182
+
+resources:
+  limits:
+    cpu: 1000m
+    memory: 1Gi
+  requests:
+    cpu: 100m
+    memory: 256Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+storagebackend:
+  elasticsearch:
+    deploy: true
+  cassandra:
+    deploy: true
+
+# subchart specific configuration
+# only used when storagebackend.<backend name>.deploy is true.
+elasticsearch:
+  master:
+    name: master
+    replicas: 1
+    persistence:
+      enabled: true
+      size: 8Gi
+  coordinating:
+    replicas: 1
+  data:
+    name: data
+    replicas: 2
+    resources:
+      requests:
+        memory: 2048Mi
+    persistence:
+      enabled: true
+      size: 10Gi
+cassandra:
+  persistence:
+    enabled: true
+    size: 10Gi
+  cluster:
+    name: cassandra
+    replicaCount: 3
+    seedCount: 2
+  dbUser:
+    user: janusgraph
+    password: b3HJyAdxacu68c9PPsguxK5xWvz6d8pJ

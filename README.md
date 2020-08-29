@@ -1,2 +1,3 @@
-# charts
-Helm Repo
+# Helm Repo
+
+This repo contains a collection of helm charts.
